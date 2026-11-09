@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Monitor de Temperatura NVMe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</head>
+<body>
+    <main class="card">
+        <header class="card-header">
+            <div>
+                <p class="eyebrow">Monitoramento do sistema</p>
+                <h1>Temperatura NVMe</h1>
+            </div>
+            <button class="theme-toggle" id="theme-toggle" type="button">
+                <span id="theme-icon" aria-hidden="true"></span>
+                <span id="theme-label"></span>
+            </button>
+        </header>
+
+        <div class="source-control">
+            <label for="source-select">Fonte da leitura</label>
+            <select id="source-select">
+                <option value="sysfs">sysfs</option>
+                <option value="smartctl">smartctl</option>
+            </select>
+        </div>
+        <div class="source-control">
+            <label for="interval-select">Intervalo de leitura</label>
+            <select id="interval-select">
+                <option value="10">10 segundos</option>
+                <option value="30">30 segundos</option>
+                <option value="60">60 segundos</option>
+            </select>
+        </div>
+
+        <div class="reading" aria-label="Temperatura atual">
+            <div class="temp" id="temp">--</div>
+            <div class="unit">°C</div>
+        </div>
+        <div class="status" id="status" role="status" aria-live="polite">Carregando...</div>
+        <section class="history" aria-label="Histórico de temperaturas">
+            <div class="history-heading">
+                <h2>Leituras anteriores</h2>
+                <span class="history-count" id="history-count">0 leituras</span>
+            </div>
+            <ul id="history"></ul>
+            <p class="history-empty" id="history-empty">Aguardando a primeira leitura...</p>
+        </section>
+        <footer class="footer">
+            <span>Atualização automática</span>
+            <span id="interval-label">A cada 10 segundos</span>
+        </footer>
+    </main>
+</body>
+</html>
